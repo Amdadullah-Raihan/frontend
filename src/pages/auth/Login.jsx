@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import loginVector from '../../assets/login-vector.png';
 import Button from '../../components/buttons/Button';
-import Divider from '../../components/divider/Divider';
+import Divider from '../../components/dividers/Divider';
 import Input from '../../components/inputs/Input';
 import Text from '../../components/texts/Text';
 import { useAuth } from '../../context/AuthContext';
@@ -111,8 +111,8 @@ const Login = () => {
   }, [serverError]);
   return (
     <div className="dark:bg-gray-900">
-      <div className=" grid items-center justify-center w-full  max-w-screen-lg md:px-8 lg:px-16 grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0 md:grid-cols-2 min-h-screen">
-        <div className="flex flex-col items-center justify-center w-full  p-6 text-gray-700 bg-white dark:bg-gray-800 border dark:border-gray-800 shadow md:max-w-sm rounded-xl dark:text-white">
+      <div className="grid items-center justify-center w-full max-w-screen-lg min-h-screen grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0  md:px-8 lg:px-16 md:grid-cols-2">
+        <div className="flex flex-col items-center justify-center w-full p-6 text-gray-700 bg-white border shadow dark:bg-gray-800 dark:border-gray-800 md:max-w-sm rounded-xl dark:text-white">
           <div className="mb-6 space-y-4 text-center ">
             {isDarkMode ? (
               <LogoWhite className="max-w-[70%] mx-auto" />
@@ -167,7 +167,7 @@ const Login = () => {
 
             <div className="mb-6 text-right">
               <Link
-                className="font-medium text-blue-800 dark:text-primary cursor-pointer"
+                className="font-medium text-blue-800 cursor-pointer dark:text-primary"
                 onClick={() => setIsOpen(true)}
               >
                 Forgot Password?
@@ -207,10 +207,10 @@ const Login = () => {
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="p-4">
-          <Text variant="h3" className="text-center mb-5">
+          <Text variant="h3" className="mb-5 text-center">
             Forgot Password?
           </Text>
-          <div className="mb-6 min-w-80 max-w-2xl">
+          <div className="max-w-2xl mb-6 min-w-80">
             <Input
               type="text"
               id="email1"
