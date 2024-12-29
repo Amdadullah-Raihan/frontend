@@ -10,4 +10,7 @@ const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
   }),
+  overrideExisting: false,
 });
+
+export const { useLoginMutation } = authApiSlice;
