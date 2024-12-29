@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.graduate-regular {
+  font-family: "Graduate", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Add this CSS to your global styles or within the component's styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #certificate,
+  #certificate * {
+    visibility: visible;
+  }
+  #certificate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Set the scrollbar track background to transparent */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5); /* Use rgba to set transparency */
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.5); /* Use rgba to set transparency */
+}
+
+/* Range input custom styles */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  height: 4px;
+  background: #D1D5DB;
+  border-radius: 5px;
+  background-image: #FF6700;
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background: #FF6700;
+  cursor: pointer;
+  box-shadow: 0 0 2px 0 #555;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+/* Change Autocomplete styles in Chrome*/
+:root {
+  --autofill-text-color: black;
+  /* Default light mode color */
+}
+.dark {
+  --autofill-text-color: white;
+  /* Dark mode color */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--autofill-text-color);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Date input styles */
+::-webkit-calendar-picker-indicator {
+  background-color: #fff; 
+  border-radius: 5px;
+}
+
+
+
+/* Remove focus outline for all clickable elements */
+.recharts-wrapper *:focus {
+  outline: none;
+}
+
+/* Specifically target Recharts segments (like pie chart segments) */
+.recharts-sector {
+  outline: none;
+}

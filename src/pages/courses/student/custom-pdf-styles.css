@@ -1,0 +1,68 @@
+
+ .rpv-default-layout__container {
+    border: none;
+
+
+}
+
+ .rpv-default-layout__toolbar {
+    background-color: #F3F4F6;
+    border-bottom: solid 1px #d1d5db;
+}
+
+.rpv-core__textbox{
+    background-color: #F3F4F6;
+}
+.rpv-core__textbox:focus{
+    outline: #F79426;
+}
+
+.rpv-default-layout__sidebar-headers {
+    background-color: #F3F4F6;
+
+}
+
+.rpv-core__inner-page {
+    background-color: #F3F4F6;
+}
+
+ .rpv-default-layout__sidebar--ltr {
+    border-right: solid 1px #d1d5db;
+}
+
+/* .rpv-core__popover-body{
+    background-color: #F3F4F6;
+} */
+
+.dark .rpv-default-layout__container{
+    border: none;
+    
+}
+
+.dark .rpv-default-layout__toolbar{
+    background-color: #374151;
+    border-bottom: solid 1px #1e293b;
+}
+.dark .rpv-core__textbox {
+    background-color: #1e293b;
+    border: none;
+}
+.dark .rpv-default-layout__sidebar-headers{
+    background-color: #374151;
+   
+}
+
+.dark .rpv-core__inner-page{
+    background-color: #374151;
+  
+}
+
+.dark .rpv-default-layout__sidebar--ltr{
+    border-right: solid 1px #1e293b;
+}
+/* .dark .rpv-core__popover-body {
+    background-color: #1e293b   ;
+} */
+
+
+

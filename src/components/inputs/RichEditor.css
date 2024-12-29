@@ -1,0 +1,141 @@
+/* Light mode toolbar styles */
+.ql-toolbar.ql-snow {
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Light mode container styles */
+.ql-container.ql-snow {
+    min-height: 78px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Dark mode placeholder color */
+.dark .ql-container.ql-snow ::placeholder {
+    color: #9B9B9B;
+}
+
+/* Dark mode toolbar styles */
+.dark .ql-toolbar.ql-snow {
+    background-color: #1F2937;
+    /* Dark background for toolbar */
+    border-color: #4b5563;
+    /* Darker border for toolbar */
+}
+
+/* Dark mode container styles */
+.dark .ql-container.ql-snow {
+    border-color: #4b5563;
+    /* Dark border for container */
+}
+
+/* Dark mode placeholder text color inside the editor */
+.dark .ql-editor::before {
+    color: #9B9B9B;
+    /* Placeholder text color */
+    opacity: 0.6;
+    /* Optional opacity for placeholder */
+}
+
+/* Button and select styles inside the toolbar for dark mode */
+.dark .ql-toolbar.ql-snow .ql-formats button,
+.dark .ql-toolbar.ql-snow .ql-formats select {
+    background-color: #374151;
+    /* Dark button background */
+    color: #D1D5DB;
+    /* Light text/icon color */
+    border: 1px solid #4b5563;
+    /* Darker border for buttons */
+    transition: background-color 0.3s ease;
+    /* Smooth background transition */
+}
+
+/* Hover and active state for buttons */
+.dark .ql-toolbar.ql-snow .ql-formats button:hover,
+.dark .ql-toolbar.ql-snow .ql-formats select:hover {
+    background-color: #4b5563;
+    /* Darker background on hover */
+}
+
+.dark .ql-toolbar.ql-snow .ql-formats button.ql-active {
+    background-color: #6b7280;
+    /* Background color for active buttons */
+}
+
+/* Disabled buttons */
+.dark .ql-toolbar.ql-snow .ql-formats button:disabled {
+    background-color: #374151;
+    /* Same background for disabled buttons */
+    opacity: 0.5;
+    /* Slight transparency */
+    cursor: not-allowed;
+    /* No interaction for disabled buttons */
+}
+
+/* Dropdown menu inside the toolbar */
+.dark .ql-toolbar.ql-snow .ql-picker-options {
+    background-color: #1F2937;
+    /* Dark background for dropdown */
+    border-color: #4b5563;
+    /* Darker border for dropdown */
+}
+
+/* Dropdown text color */
+.dark .ql-toolbar.ql-snow .ql-picker-options .ql-picker-item {
+    color: #D1D5DB;
+    /* Light text color */
+}
+
+/* Dropdown hover effect */
+.dark .ql-toolbar.ql-snow .ql-picker-options .ql-picker-item:hover {
+    background-color: #4b5563;
+    /* Darker background on hover */
+}
+
+/* Header selection styles in the toolbar for dark mode */
+.dark .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-label {
+    background-color: #374151;
+    /* Dark background for header dropdown */
+    color: #D1D5DB;
+    /* Light text color */
+    border: 1px solid #4b5563;
+    /* Border for the dropdown */
+}
+
+/* Header selection dropdown options */
+.dark .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-options {
+    background-color: #1F2937;
+    /* Dark background for options */
+    border: 1px solid #4b5563;
+    /* Border for options */
+}
+
+/* Header options text color */
+.dark .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-item {
+    color: #D1D5DB;
+    /* Light text color for header options */
+}
+
+/* Header option hover effect */
+.dark .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-item:hover {
+    background-color: #4b5563;
+    /* Darker background on hover */
+}
+
+/* Active header option */
+.dark .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-item.ql-active {
+    background-color: #6b7280;
+    /* Background color for active header */
+    color: #F9FAFB;
+    /* Lighter text for active option */
+}
+
+/* Icons inside the toolbar buttons */
+.dark .ql-toolbar.ql-snow .ql-formats button .ql-stroke,
+.dark .ql-toolbar.ql-snow .ql-formats button .ql-fill {
+    stroke: #D1D5DB;
+    /* Light color for icon strokes */
+
+}
