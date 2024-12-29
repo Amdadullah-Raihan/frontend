@@ -1,13 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {};
+const initialState = {
+  user: JSON.parse(localStorage.getItem('user')) || {},
+};
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      const user = action.payload;
+      state.user = user;
+      localStorage.setItem('user', JSON.stringify(user));
+    },
+    removeUser: (state) => {
+      state.user = {};
+      localStorage.removeItem('user');
+    },
+  },
 });
 
-// const {} = authSlice.actions;
+export const { setUser, removeUser } = authSlice.actions;
 
 export default authSlice.reducer;
