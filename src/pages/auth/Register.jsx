@@ -4,7 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 
 import loginVector from '../../assets/login-vector.png';
 import Button from '../../components/buttons/Button';
-import Divider from '../../components/divider/Divider';
+import Divider from '../../components/dividers/Divider';
 import Input from '../../components/inputs/Input';
 import Text from '../../components/texts/Text';
 import axiosInstance from '../../api/axiosInstance';
