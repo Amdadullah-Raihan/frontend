@@ -3,11 +3,13 @@ import { BookOpenText, UserRound } from 'lucide-react';
 
 import Text from '../../../components/texts/Text';
 import LoadingCircle from '../../../components/svgs/LoadingCircle';
-import { useTheme } from '../../../context/ThemeContext';
 import axiosInstance from '../../../api/axiosInstance';
+import { useSelector } from 'react-redux';
 
 const CircularProgress = ({ progress }) => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
+
+  // Local States
   const strokeWidth = 5;
   const radius = 45;
   const normalizedRadius = radius - strokeWidth * 2;
@@ -112,7 +114,7 @@ const StudentsProgress = () => {
       <div className="flex items-center justify-between py-5 ">
         <Text variant="h4">Student&apos;s Progress</Text>
         <select
-          className="p-2 text-sm  bg-gray-200 hover:bg-gray-300 rounded-md  dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors focus:outline-none  focus:outline-primary  cursor-pointer"
+          className="p-2 text-sm transition-colors bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:outline-primary"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         >
