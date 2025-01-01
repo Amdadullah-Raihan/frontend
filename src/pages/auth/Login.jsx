@@ -11,24 +11,28 @@ import { useAuth } from '../../context/AuthContext';
 import { Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react';
 import Modal from '../../components/Modal';
 
-import { useTheme } from '../../context/ThemeContext';
 import LogoWhite from '../../components/logos/LogoWhite';
 import Logo from '../../components/logos/Logo';
 import axiosInstance from '../../api/axiosInstance';
 import CopyRight from '../rights/CopyRight';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../../store/auth/auth.api';
+import { setUser } from '../../store/auth/auth.slice';
+import log from '../../utils/log';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { isDarkMode } = useSelector((state) => state.theme);
+  const [login, { isLoading: singingIn, isSuccess, error }] =
+    useLoginMutation();
+
+  // Local States
   const navigate = useNavigate();
-  const { login } = useAuth();
-
-  const { isDarkMode } = useTheme();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
-  const [serverError, setServerError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState(error?.data?.message);
   const [isOpen, setIsOpen] = useState(false);
   const [forgetPassEmail, setForgetPassEmail] = useState('');
   const [forgetPassError, setForgetPassError] = useState('');
@@ -62,17 +66,14 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (validate()) {
-      setLoading(true);
-      try {
-        const isPassHash = false;
-        await login(email, password, isPassHash);
-        navigate('/');
-        toast.success('Successfully logged in');
-      } catch (err) {
-        setServerError(err.response.data.message);
-        console.error('login err: ', err);
-      } finally {
-        setLoading(false);
+      const response = await login({ email, password });
+      log.success('login response', response);
+
+      if (isSuccess) {
+        dispatch(
+          setUser({ user: response.data.user, token: response.data.token })
+        );
+        // navigate('/');
       }
     }
   };
@@ -111,7 +112,7 @@ const Login = () => {
   }, [serverError]);
   return (
     <div className="dark:bg-gray-900">
-      <div className="grid items-center justify-center w-full max-w-screen-lg min-h-screen grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0  md:px-8 lg:px-16 md:grid-cols-2">
+      <div className="grid items-center justify-center w-full max-w-screen-lg min-h-screen grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0 md:px-8 lg:px-16 md:grid-cols-2">
         <div className="flex flex-col items-center justify-center w-full p-6 text-gray-700 bg-white border shadow dark:bg-gray-800 dark:border-gray-800 md:max-w-sm rounded-xl dark:text-white">
           <div className="mb-6 space-y-4 text-center ">
             {isDarkMode ? (
@@ -119,9 +120,15 @@ const Login = () => {
             ) : (
               <Logo className="max-w-[70%] mx-auto" />
             )}
-            <Text className="text-gray-500 dark:text-gray-300">
-              Log into your account
-            </Text>
+            {error ? (
+              <Text className="mb-4 text-center text-red-500">
+                {error.data.message}
+              </Text>
+            ) : (
+              <Text className="text-gray-500 dark:text-gray-300">
+                Log into your account
+              </Text>
+            )}
           </div>
           <form onSubmit={handleLogin} className="w-full px-5 pb-4 text-start">
             <div className="mb-4">
@@ -161,9 +168,6 @@ const Login = () => {
                 }
               />
             </div>
-            {serverError && (
-              <div className="mb-4 text-red-500">{serverError}</div>
-            )}
 
             <div className="mb-6 text-right">
               <Link
@@ -178,10 +182,10 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <Button
                   type="submit"
-                  disabled={loading}
+                  disabled={singingIn}
                   className="w-full h-10"
                 >
-                  {!loading ? 'Sign In' : 'Singing in...'}
+                  {!singingIn ? 'Sign In' : 'Singing in...'}
                 </Button>
               </div>
               <Divider label="Or" />
@@ -191,7 +195,7 @@ const Login = () => {
                     type="none"
                     variant="outline"
                     className="w-full h-10"
-                    disabled={loading}
+                    disabled={singingIn}
                   >
                     Sign Up
                   </Button>

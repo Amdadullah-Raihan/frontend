@@ -25,7 +25,7 @@ const MoreCourseCard = ({ course, isMyCourses }) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
 
   const handleNavigation = () => {
-    if (isMyCourses || user.user.role === 'admin') {
+    if (isMyCourses || user.role === 'admin') {
       navigate(`/courses/${course._id}`);
     }
   };
@@ -40,8 +40,8 @@ const MoreCourseCard = ({ course, isMyCourses }) => {
     } else {
       try {
         const res = await axiosInstance.post('/api/myCourses', {
-          username: user.user.username,
-          email: user.user.email,
+          username: user.username,
+          email: user.email,
           courseId: course._id,
         });
         if (res.status === 200) {
@@ -137,7 +137,7 @@ const MoreCourseCard = ({ course, isMyCourses }) => {
           </div>
         ) : (
           <div className="grid items-center justify-between grid-cols-2 gap-2 p-2 pt-4">
-            {user.user.role !== 'admin' && (
+            {user.role !== 'admin' && (
               <Button
                 variant="primary"
                 onClick={() => handleCourseEnroll(course)}
@@ -176,7 +176,7 @@ const MoreCourseCard = ({ course, isMyCourses }) => {
                   Cancel
                 </Button>
 
-                {user.user.role !== 'admin' && (
+                {user.role !== 'admin' && (
                   <Button
                     variant="primary"
                     onClick={() => handleCourseEnroll(course)}

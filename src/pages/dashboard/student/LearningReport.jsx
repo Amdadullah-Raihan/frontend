@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '../../../context/ThemeContext';
 import {
   Area,
   AreaChart,
@@ -22,6 +21,7 @@ import { formatDateShort } from '../../../utils/formatDateShort';
 import CustomTooltip from '../admin/CustomTooltip';
 import axiosInstance from '../../../api/axiosInstance';
 import log from '../../../utils/log';
+import { useSelector } from 'react-redux';
 
 const last7DaysData = [
   {
@@ -180,9 +180,10 @@ const last30DaysData = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const LearningReport = () => {
-  const { user } = useAuth();
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
 
+  //Local States
+  const { user } = useAuth();
   const [data, setData] = useState(last7DaysData);
   const [view, setView] = useState('weekly');
   const [pieData, setPieData] = useState([]);
@@ -233,7 +234,7 @@ const LearningReport = () => {
 
   // Fetch quiz stats
   useEffect(() => {
-    const { _id: studentId, email } = user.user;
+    const { _id: studentId, email } = user;
     const fetchQuizStats = async () => {
       try {
         const response = await axiosInstance.get(
@@ -251,7 +252,7 @@ const LearningReport = () => {
 
   // Fetch data based on view (weekly or monthly)
   useEffect(() => {
-    const userId = user.user._id;
+    const userId = user._id;
     const convertToMinutes = (milliseconds) => {
       return (milliseconds / 60000).toFixed(2); // Convert milliseconds to minutes
     };

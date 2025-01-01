@@ -26,7 +26,7 @@ const MyCourseList = () => {
     const fetchCourses = async () => {
       try {
         const response = await axiosInstance.get(
-          `/api/myCourses?email=${user.user.email}&page=${currentPage}&limit=${limit}`
+          `/api/myCourses?email=${user.email}&page=${currentPage}&limit=${limit}`
         );
         setCourses(response.data.courses);
         setTotalPages(response.data.totalCourses);
@@ -44,7 +44,7 @@ const MyCourseList = () => {
     return () => {
       setLoading(false); // Ensures loading stops if the component unmounts
     };
-  }, [user.user.email, currentPage, limit]);
+  }, [user.email, currentPage, limit]);
 
   if (loading) {
     return (

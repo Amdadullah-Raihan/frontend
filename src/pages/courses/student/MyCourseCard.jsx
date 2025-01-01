@@ -20,7 +20,7 @@ const MyCourseCard = ({ course }) => {
     const fetchProgress = async () => {
       try {
         const response = await axiosInstance.get(
-          `/api/progress/video/${user.user._id}`
+          `/api/progress/video/${user._id}`
         );
         const responseData = response.data;
 
@@ -51,7 +51,7 @@ const MyCourseCard = ({ course }) => {
     };
 
     fetchProgress();
-  }, [user.user._id, course.course._id]);
+  }, [user._id, course.course._id]);
 
   // progress numbers animation
   useEffect(() => {

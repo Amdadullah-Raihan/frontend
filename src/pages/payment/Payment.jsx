@@ -29,7 +29,7 @@ function Payment({ course, setOpenPayment }) {
     if (!currency) {
       return setError('Currency is Required');
     }
-    if (!user.user.email) {
+    if (!user.email) {
       return setError('User Not Found');
     }
 
@@ -75,7 +75,7 @@ function Payment({ course, setOpenPayment }) {
         <Input
           type="text"
           id="email1"
-          value={user.user.email}
+          value={user.email}
           label="Email"
           disabled={true}
         />

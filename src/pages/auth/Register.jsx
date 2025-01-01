@@ -8,14 +8,15 @@ import Divider from '../../components/dividers/Divider';
 import Input from '../../components/inputs/Input';
 import Text from '../../components/texts/Text';
 import axiosInstance from '../../api/axiosInstance';
-import { useTheme } from '../../context/ThemeContext';
 import LogoWhite from '../../components/logos/LogoWhite';
 import Logo from '../../components/logos/Logo';
 import CopyRight from '../rights/CopyRight';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
 
+  // Local States
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

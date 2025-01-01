@@ -1,14 +1,12 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { useAuth } from './context/AuthContext';
 import NotFound from './NotFound';
 import Account from './pages/account/Account';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import CertificateGrid from './pages/certificate/CertificateGrid';
-
 import CourseDetails from './pages/courses/student/CourseDetailsPage';
 import Courses from './pages/courses/student/Courses';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -23,12 +21,13 @@ import MoreCourses from './pages/courses/student/MoreCourses';
 import PrivacyPolicy from './pages/rights/PrivacyPolicy';
 import TermsOfService from './pages/rights/TermsOfService';
 import CreateCoursePage from './pages/courses/admin/CreateCoursePage';
-import { CreateCourseProvider } from './context/CreateCourseContext';
 import SingleCertificate from './pages/certificate/student/SingleCertificate';
 import SharedCertificate from './pages/certificate/SharedCertificate';
+import { useSelector } from 'react-redux';
 
 const Routers = () => {
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
@@ -43,11 +42,7 @@ const Routers = () => {
           <Route
             index
             element={
-              user && user.user.role === 'student' ? (
-                <MyCourseList />
-              ) : (
-                <ManageCourses />
-              )
+              user?.role === 'student' ? <MyCourseList /> : <ManageCourses />
             }
           />
 

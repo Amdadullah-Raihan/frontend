@@ -5,21 +5,22 @@ import { Link, NavLink } from 'react-router-dom';
 import { navLinks } from './navLinks';
 import Button from '../components/buttons/Button';
 import Text from '../components/texts/Text';
-import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
 import LogoWhite from '../components/logos/LogoWhite';
 import Logo from '../components/logos/Logo';
 import NightModeToggle from './NightModeToggle ';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../store/auth/auth.slice';
 
 const Sidebar = () => {
-  const { user, logout } = useAuth();
-  const { isDarkMode } = useTheme();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { isDarkMode } = useSelector((state) => state.theme);
 
   // Dropdown state
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const handleLogout = () => {
-    logout();
+    dispatch(removeUser());
   };
 
   // Toggle dropdown
@@ -29,7 +30,7 @@ const Sidebar = () => {
 
   // Filter nav links based on user role
   const filteredNavLinks = navLinks.filter((link) =>
-    link.roles.includes(user.user.role)
+    link.roles.includes(user.role)
   );
 
   return (
@@ -42,9 +43,9 @@ const Sidebar = () => {
           <Link to="/">{isDarkMode ? <LogoWhite /> : <Logo />}</Link>
         </div>
         <div className="flex items-center gap-2 px-4 mt-7">
-          {user.user.image ? (
+          {user.image ? (
             <div className="w-10 h-10 overflow-hidden bg-no-repeat bg-contain rounded-full">
-              <img src={user.user.image} alt="" />
+              <img src={user.image} alt="" />
             </div>
           ) : (
             <CircleUserRound
@@ -95,16 +96,16 @@ const Sidebar = () => {
           ) : link.subLinks ? (
             // Check if sub-links are available for the user's role
             link.subLinks.some((subLink) =>
-              subLink.roles.includes(user.user.role)
+              subLink.roles.includes(user.role)
             ) ? (
               <div key={index}>
                 {/* Parent link that triggers dropdown */}
                 <div
                   onClick={() => toggleDropdown(index)}
-                  className="cursor-pointer py-2 px-2 w-full font-medium flex gap-2 text-sm items-center capitalize text-gray-800 hover:text-primary dark:text-white dark:hover:text-primary"
+                  className="flex items-center w-full gap-2 px-2 py-2 text-sm font-medium text-gray-800 capitalize cursor-pointer hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   {link.icon}
-                  <div className="w-full gap-1 flex items-center">
+                  <div className="flex items-center w-full gap-1">
                     {link.label}
                     <span className="">
                       <ChevronDown
@@ -124,7 +125,7 @@ const Sidebar = () => {
                   }`}
                 >
                   {link.subLinks
-                    .filter((subLink) => subLink.roles.includes(user.user.role))
+                    .filter((subLink) => subLink.roles.includes(user.role))
                     .map((subLink) => (
                       <NavLink
                         key={subLink.href}
