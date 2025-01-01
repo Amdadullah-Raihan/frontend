@@ -1,20 +1,21 @@
 import React from 'react';
-import { useTheme } from '../../../context/ThemeContext';
 import Text from '../../../components/texts/Text';
 import LogoWhite from '../../../components/logos/LogoWhite';
 import Logo from '../../../components/logos/Logo';
 import { formatDate } from '../../../utils/formatDate';
+import { useSelector } from 'react-redux';
 
 const CertificateCard = ({ certificate, handleCardClick }) => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
+
   return (
     <div
       key={certificate?._id}
-      className="w-full bg-white border dark:border-gray-800 rounded-lg shadow-sm cursor-pointer h-full dark:bg-gray-800"
+      className="w-full h-full bg-white border rounded-lg shadow-sm cursor-pointer dark:border-gray-800 dark:bg-gray-800"
       onClick={() => handleCardClick(certificate)}
     >
-      <div className="overflow-hidden rounded-lg h-full">
-        <div className="flex bg-white h-full dark:bg-gray-800">
+      <div className="h-full overflow-hidden rounded-lg">
+        <div className="flex h-full bg-white dark:bg-gray-800">
           <div className="relative bg-gray-200 dark:bg-gray-700 ">
             <div className="flex items-end h-full p-2">
               {isDarkMode ? (
