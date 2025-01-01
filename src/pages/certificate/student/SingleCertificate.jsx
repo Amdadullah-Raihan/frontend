@@ -15,23 +15,17 @@ import {
   Twitter,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { useTheme } from '../../../context/ThemeContext';
 import useTitle from '../../../hooks/useTitle';
 import Button from '../../../components/buttons/Button';
 import Text from '../../../components/texts/Text';
 import LogoWhite from '../../../components/logos/LogoWhite';
 import { formatDate } from '../../../utils/formatDate';
-
-// import Button from '../../../components/buttons/Button';
-// import Text from '../../../components/texts/Text';
-// import { formatDate } from '../../../utils/formatDate';
-// import { useTheme } from '../../../context/ThemeContext';
-// import LogoWhite from '../../../components/logos/LogoWhite';
-// import Logo from '../../../components/logos/Logo';
-// import useTitle from '../../../hooks/useTitle';
+import { useSelector } from 'react-redux';
 
 const SingleCertificate = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
+
+  // Local states
   const { id } = useParams();
   const location = useLocation();
   const { courseName, issueDate, username } = location.state;
@@ -86,24 +80,24 @@ const SingleCertificate = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Facebook className="p-1 text-white bg-gray-800 dark:bg-gray-700 dark:hover:bg-primary  rounded-md cursor-pointer hover:bg-primary" />
+              <Facebook className="p-1 text-white bg-gray-800 rounded-md cursor-pointer dark:bg-gray-700 dark:hover:bg-primary hover:bg-primary" />
             </Link>
             <Link
               to={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareableLink)}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Twitter className="p-1 text-white bg-gray-800 dark:bg-gray-700 dark:hover:bg-primary  rounded-md cursor-pointer hover:bg-primary" />
+              <Twitter className="p-1 text-white bg-gray-800 rounded-md cursor-pointer dark:bg-gray-700 dark:hover:bg-primary hover:bg-primary" />
             </Link>
             <Link
               to={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareableLink)}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Linkedin className="p-1 text-white bg-gray-800 dark:bg-gray-700 dark:hover:bg-primary  rounded-md cursor-pointer hover:bg-primary" />
+              <Linkedin className="p-1 text-white bg-gray-800 rounded-md cursor-pointer dark:bg-gray-700 dark:hover:bg-primary hover:bg-primary" />
             </Link>
             <Copy
-              className="p-1 text-white bg-gray-800 dark:bg-gray-700 dark:hover:bg-primary  rounded-md cursor-pointer hover:bg-primary"
+              className="p-1 text-white bg-gray-800 rounded-md cursor-pointer dark:bg-gray-700 dark:hover:bg-primary hover:bg-primary"
               onClick={copyToClipboard}
             />
           </div>
