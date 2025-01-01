@@ -6,14 +6,14 @@ import { navLinks } from './navLinks';
 import Button from '../components/buttons/Button';
 import Text from '../components/texts/Text';
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext';
 import LogoWhite from '../components/logos/LogoWhite';
 import Logo from '../components/logos/Logo';
 import NightModeToggle from './NightModeToggle ';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useSelector((state) => state.theme);
 
   // Dropdown state
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -101,10 +101,10 @@ const Sidebar = () => {
                 {/* Parent link that triggers dropdown */}
                 <div
                   onClick={() => toggleDropdown(index)}
-                  className="cursor-pointer py-2 px-2 w-full font-medium flex gap-2 text-sm items-center capitalize text-gray-800 hover:text-primary dark:text-white dark:hover:text-primary"
+                  className="flex items-center w-full gap-2 px-2 py-2 text-sm font-medium text-gray-800 capitalize cursor-pointer hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   {link.icon}
-                  <div className="w-full gap-1 flex items-center">
+                  <div className="flex items-center w-full gap-1">
                     {link.label}
                     <span className="">
                       <ChevronDown
