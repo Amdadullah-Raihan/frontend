@@ -1,29 +1,25 @@
 // src/api/axiosInstance.js
 import axios from 'axios';
+import log from '../utils/log';
 
 // Function to get API URL based on environment
-const apiUrl = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:5000';
-  } else {
-    return 'https://lms-backend-ivory.vercel.app';
-  }
-};
+const baseURL = import.meta.env.VITE_API_URL;
 
 // Create an Axios instance with baseURL
 const axiosInstance = axios.create({
-  baseURL: apiUrl(),
+  baseURL,
 });
 
 // Attach the JWT token to every request if it exists
 axiosInstance.interceptors.request.use(
   (config) => {
     // Retrieve the user object from localStorage
-    const user = JSON.parse(localStorage.getItem('user'));
+    const token = JSON.parse(localStorage.getItem('token'));
+    log.info('token: ', token);
 
-    if (user && user.token) {
+    if (token) {
       // Add the token to the Authorization header
-      config.headers['Authorization'] = `Bearer ${user.token}`;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
