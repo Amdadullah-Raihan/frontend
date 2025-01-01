@@ -11,18 +11,18 @@ import { useAuth } from '../../context/AuthContext';
 import { Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react';
 import Modal from '../../components/Modal';
 
-import { useTheme } from '../../context/ThemeContext';
 import LogoWhite from '../../components/logos/LogoWhite';
 import Logo from '../../components/logos/Logo';
 import axiosInstance from '../../api/axiosInstance';
 import CopyRight from '../rights/CopyRight';
+import { useSelector } from 'react-redux';
 
 const Login = () => {
+  const { isDarkMode } = useSelector((state) => state.theme);
+
+  // Local States
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  const { isDarkMode } = useTheme();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -111,7 +111,7 @@ const Login = () => {
   }, [serverError]);
   return (
     <div className="dark:bg-gray-900">
-      <div className="grid items-center justify-center w-full max-w-screen-lg min-h-screen grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0  md:px-8 lg:px-16 md:grid-cols-2">
+      <div className="grid items-center justify-center w-full max-w-screen-lg min-h-screen grid-cols-1 p-5 mx-auto transition-transform duration-300 translate-x-0 md:px-8 lg:px-16 md:grid-cols-2">
         <div className="flex flex-col items-center justify-center w-full p-6 text-gray-700 bg-white border shadow dark:bg-gray-800 dark:border-gray-800 md:max-w-sm rounded-xl dark:text-white">
           <div className="mb-6 space-y-4 text-center ">
             {isDarkMode ? (
