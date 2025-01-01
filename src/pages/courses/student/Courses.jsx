@@ -20,7 +20,7 @@ const Courses = React.memo(() => {
 
   // Redirect to /courses/my-courses if the pathname is /courses
   useEffect(() => {
-    if (location.pathname === '/courses' && user.user.role === 'student') {
+    if (location.pathname === '/courses' && user.role === 'student') {
       navigate('/courses/my-courses');
     }
   }, [location.pathname, navigate]);
@@ -33,7 +33,7 @@ const Courses = React.memo(() => {
 
   return (
     <div className="max-w-screen-xl mx-auto space-y-5">
-      {user.user.role === 'student' ? (
+      {user.role === 'student' ? (
         <div className="sticky top-0 flex items-center gap-5 p-3 bg-white rounded-lg shadow dark:bg-gray-800">
           <NavLink
             className={({ isActive }) => getNavLinkClass(isActive)}

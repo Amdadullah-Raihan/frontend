@@ -234,7 +234,7 @@ const LearningReport = () => {
 
   // Fetch quiz stats
   useEffect(() => {
-    const { _id: studentId, email } = user.user;
+    const { _id: studentId, email } = user;
     const fetchQuizStats = async () => {
       try {
         const response = await axiosInstance.get(
@@ -252,7 +252,7 @@ const LearningReport = () => {
 
   // Fetch data based on view (weekly or monthly)
   useEffect(() => {
-    const userId = user.user._id;
+    const userId = user._id;
     const convertToMinutes = (milliseconds) => {
       return (milliseconds / 60000).toFixed(2); // Convert milliseconds to minutes
     };

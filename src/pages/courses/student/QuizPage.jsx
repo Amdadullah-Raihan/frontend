@@ -132,7 +132,7 @@ const Quiz = ({
     const fetchQuizProgress = async () => {
       try {
         const response = await axiosInstance.get(
-          `/api/quiz-progress/result/${user.user._id}/${courseId}`
+          `/api/quiz-progress/result/${user._id}/${courseId}`
         );
         if (response.data) {
           setSelectedAnswers(response.data.progress);
@@ -166,7 +166,7 @@ const Quiz = ({
       localStorage.setItem('quizProgress', JSON.stringify(selectedAnswers));
       try {
         await axiosInstance.post(`/api/quiz-progress/save`, {
-          studentId: user.user._id,
+          studentId: user._id,
           courseId,
           quizId: quizId,
           progress: selectedAnswers,

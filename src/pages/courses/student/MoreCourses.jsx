@@ -28,7 +28,7 @@ const MoreCourses = () => {
     const fetchCourses = async () => {
       try {
         const response = await axiosInstance.get(
-          `/api/courses/unenrolled/${user.user.email}?page=${currentPage}&limit=${limit}`
+          `/api/courses/unenrolled/${user.email}?page=${currentPage}&limit=${limit}`
         );
         setCourses(response.data.unenrolledCourses);
         setTotalPages(response.data.totalCourses);

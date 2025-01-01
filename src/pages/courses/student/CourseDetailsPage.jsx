@@ -49,7 +49,7 @@ const CourseDetails = () => {
     try {
       // Send request to backend to unlock the next video
       const response = await axiosInstance.post(`/api/courses/video/unlock`, {
-        userId: user.user._id,
+        userId: user._id,
         courseId,
         nextVideoId: nextVideo._id,
       });
@@ -95,7 +95,7 @@ const CourseDetails = () => {
   const fetchCourseData = async () => {
     try {
       const response = await axiosInstance.post(`/api/courses/${id}`, {
-        userId: user.user._id,
+        userId: user._id,
       });
       setCourse(response.data);
 
@@ -122,7 +122,7 @@ const CourseDetails = () => {
     const fetchProgress = async () => {
       try {
         const response = await axiosInstance.get(
-          `/api/progress/video/${user.user._id}`
+          `/api/progress/video/${user._id}`
         );
         const responseData = response.data;
 
@@ -154,7 +154,7 @@ const CourseDetails = () => {
     };
 
     fetchProgress();
-  }, [course, user.user._id]);
+  }, [course, user._id]);
 
   // Effect to synchronize the height of the LessonsList with VideoPlayer
   useEffect(() => {
@@ -202,7 +202,7 @@ const CourseDetails = () => {
               <VideoPlayer
                 src={selectedLesson.content}
                 title={selectedLesson.title}
-                userId={user.user._id}
+                userId={user._id}
               />
             ) : (
               <Quiz quiz={selectedLesson} />
@@ -214,7 +214,7 @@ const CourseDetails = () => {
           {/* <VideoPlayer
             src={course?.videos[currentIndex].url}
             title={course?.videos[currentIndex].title}
-            userId={user.user._id}
+            userId={user._id}
             courseId={course?._id}
             videoId={course?.videos[currentIndex]._id}
           /> */}
@@ -262,7 +262,7 @@ const CourseDetails = () => {
               // unlockedVideos={unlockedVideos}
               // totalVideos={totalVideos}
               // progress={progress}
-              // userId={user.user._id}
+              // userId={user._id}
               // hasCompletedQuiz={hasCompletedQuiz}
               // setHasCompletedQuiz={setHasCompletedQuiz}
             />

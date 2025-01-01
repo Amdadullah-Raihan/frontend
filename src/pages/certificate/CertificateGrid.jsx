@@ -29,10 +29,10 @@ const CertificateGrid = () => {
   useEffect(() => {
     const fetchCertificates = async () => {
       let url;
-      if (user.user.role === 'admin') {
+      if (user.role === 'admin') {
         url = `/api/certificates`; // Use relative URL for admin
       } else {
-        url = `/api/certificates/by-email/${user.user.email}`; // Use relative URL for non-admin
+        url = `/api/certificates/by-email/${user.email}`; // Use relative URL for non-admin
       }
       try {
         setLoading(true);
@@ -50,7 +50,7 @@ const CertificateGrid = () => {
     };
 
     fetchCertificates();
-  }, [user.user.role, user.user.email, currentPage, limit]);
+  }, [user.role, user.email, currentPage, limit]);
 
   useEffect(() => {
     // Filter certificates based on the search query
@@ -87,11 +87,7 @@ const CertificateGrid = () => {
   if (loading) {
     return (
       <div>
-        {user.user.role === 'admin' ? (
-          <SkeletonTable />
-        ) : (
-          <SkeletonCertificates />
-        )}
+        {user.role === 'admin' ? <SkeletonTable /> : <SkeletonCertificates />}
       </div>
     );
   }
@@ -102,11 +98,9 @@ const CertificateGrid = () => {
         className={`mx-auto mb-4 p-3  bg-white grid grid-cols-2 gap-y-4 md:grid-cols-[3fr_2fr] lg:grid-cols-[4fr_1.2fr] items-center rounded-lg shadow sticky top-0 z-[70] dark:bg-gray-800`}
       >
         <Text variant="h4">
-          {user.user.role === 'admin'
-            ? 'Manage Certificates'
-            : 'My Certificates'}
+          {user.role === 'admin' ? 'Manage Certificates' : 'My Certificates'}
         </Text>
-        {user.user.role === 'admin' && (
+        {user.role === 'admin' && (
           <Input
             placeholder="Search... "
             className="pr-8 text-sm"
@@ -118,13 +112,13 @@ const CertificateGrid = () => {
       </div>
       {filteredCertificates.length === 0 ? (
         <Text className="text-rose-500">
-          {user.user.role === 'admin'
+          {user.role === 'admin'
             ? 'No certificates found.'
             : "You don't have any certificates yet."}
         </Text>
       ) : (
         <>
-          {user.user.role === 'admin' ? (
+          {user.role === 'admin' ? (
             <>
               <CertificateTable
                 certificates={filteredCertificates}
@@ -151,7 +145,7 @@ const CertificateGrid = () => {
                     key={certificate?._id}
                     certificate={certificate}
                     handleCardClick={handleCardClick}
-                    isAdmin={user.user.role === 'admin'}
+                    isAdmin={user.role === 'admin'}
                   />
                 ))}
               </div>

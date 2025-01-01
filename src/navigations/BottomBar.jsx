@@ -2,22 +2,26 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { navLinks } from './navLinks';
-import { useAuth } from '../context/AuthContext';
 import { CircleUser, LogOut, UserRoundCog } from 'lucide-react';
 import NightModeToggle from './NightModeToggle ';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../store/auth/auth.slice';
 
 const BottomBar = () => {
-  const { user, logout } = useAuth();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  // Local States
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef(null);
 
   const handleLogout = () => {
-    logout();
+    dispatch(removeUser());
   };
 
   // Filter nav links based on user role and limit to 4 items
   const filteredNavLinks = navLinks
-    .filter((link) => link.roles.includes(user.user.role))
+    .filter((link) => link.roles.includes(user.role))
     .slice(0, 4);
 
   // Handle click outside to close the profile menu
@@ -74,9 +78,9 @@ const BottomBar = () => {
             className="flex flex-col items-center"
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
           >
-            {user.user.image ? (
+            {user.image ? (
               <div className="flex items-center justify-center w-[1.2rem] h-[1.2rem] overflow-hidden rounded-full">
-                <img src={user.user.image} alt="" />
+                <img src={user.image} alt="" />
               </div>
             ) : (
               <CircleUser
@@ -91,7 +95,7 @@ const BottomBar = () => {
           </div>
           {isProfileMenuOpen && (
             <div className="absolute pt-2 bg-white border rounded-lg shadow-lg w-44 dark:border-gray-700 dark:bg-gray-800 right-4 bottom-10">
-              {user.user.role === 'admin' && (
+              {user.role === 'admin' && (
                 <Link
                   to="/profile"
                   className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
